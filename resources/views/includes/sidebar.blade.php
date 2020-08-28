@@ -48,6 +48,12 @@
             </li>
             <li class="nav-item">
                 <a href="alerts.html">
+                    <i class="nav-icon i-File-Pictures"></i>
+                    <span class="item-name">Galleries</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="alerts.html">
                     <i class="nav-icon i-Filter-2"></i>
                     <span class="item-name">Categories</span>
                 </a>
