@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SIPENTORy BBT</title>
+    <title>@yield('title')</title>
     @include('includes.style')
 </head>
 
@@ -22,11 +22,15 @@
         <!--=============== Left side ================-->
         @include('includes.sidebar')
         <!--=============== Left side End ================-->
-        <!-- ============ Body content start ============= -->
-        @yield('content')
-        <!-- ============ Body content End ============= -->
+        <div class="main-content-wrap sidenav-open d-flex flex-column">
+            <!-- ============ Body content start ============= -->
+            @yield('content')
+            <!-- ============ Body content End ============= -->
+            @include('includes.footer')
+        </div>
     </div>
     <!--=============== End app-admin-wrap ================-->
+ 
     @include('includes.script')
 </body>
 

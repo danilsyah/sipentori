@@ -13,7 +13,7 @@
                     </div>
                     <div class="flex-grow-1"></div>
                     <div class="w-100 mb-4">
-                        <a class="btn btn-outline-primary btn-block btn-icon-text btn-rounded" href="signin.html">
+                        <a class="btn btn-outline-primary btn-block btn-icon-text btn-rounded" href="{{ route('login') }}">
                             <i class="i-Mail-with-At-Sign"></i> Sign in with Email
                         </a>
                         <a class="btn btn-outline-google btn-block btn-icon-text btn-rounded">

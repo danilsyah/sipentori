@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="alerts.html">
+                <a href="{{ route('category.index') }}">
                     <i class="nav-icon i-Filter-2"></i>
                     <span class="item-name">Categories</span>
                 </a>

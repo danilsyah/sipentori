@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('login');
 });
+
 Auth::routes(['verify' => true]);
 
 Route::middleware(['auth','admin','verified'])
     ->group(function(){
         Route::get('/dashboard','DashboardController@index')->name('dashboard');
+        Route::resource('category', 'CategoryController');
     });
