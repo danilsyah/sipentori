@@ -30,8 +30,9 @@
         </div>
     </div>
     <!--=============== End app-admin-wrap ================-->
- 
+    @include('sweetalert::alert')
     @include('includes.script')
+    @stack('confirm-delete')
 </body>
 
 </html>

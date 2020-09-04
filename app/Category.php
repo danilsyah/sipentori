@@ -12,4 +12,8 @@ class Category extends Model
     protected $fillable = ['name'];
 
     protected $hidden = [];
+
+    public function items(){
+        return $this->hasMany(Item::class, 'categories_id', 'id');
+    }
 }

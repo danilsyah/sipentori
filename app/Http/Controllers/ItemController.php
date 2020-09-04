@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\CategoryRequest;
+
+namespace App\Http\Controllers;
+use App\Http\Requests\ItemRequest;
+use App\Item;
 use App\Category;
 use Illuminate\Http\Request;
 
-
-class CategoryController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $items = Category::all();
+        $items = Item::with(['category'])->get();
 
-        return view('pages.category.index',[
+        return view('pages.item.index',[
             'items' => $items
         ]);
     }
@@ -29,7 +31,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('pages.category.create');
+        $categories = Category::all();
+        return view('pages.item.create',[
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -38,18 +43,18 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(ItemRequest $request)
     {
         $data = $request->all();
-        Category::create($data);
-       
-        return redirect()->route('category.index');
+        Item::create($data);
+
+        return redirect()->route('item.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,14 +65,16 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $item = Category::findOrFail($id);
-        return view('pages.category.edit',[
-            'item' => $item
+        $item = Item::findOrFail($id);
+        $categories = Category::all();
+        return view('pages.item.edit',[
+            'item' => $item,
+            'categories' => $categories
         ]);
     }
 
@@ -75,29 +82,29 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(ItemRequest $request, $id)
     {
         $data = $request->all();
-        $item = Category::findOrFail($id);
+        $item = Item::findOrFail($id);
         $item->update($data);
 
-        return redirect()->route('category.index');
+        return redirect()->route('item.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $item = Category::findOrFail($id);
+        $item = Item::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('category.index');
+        return redirect()->route('item.index');
     }
 }

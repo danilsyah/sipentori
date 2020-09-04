@@ -41,7 +41,7 @@
     <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
         <ul class="childNav" data-parent="data-master">
             <li class="nav-item">
-                <a href="alerts.html">
+                <a href="{{ route('item.index') }}">
                     <i class="nav-icon i-Empty-Box"></i>
                     <span class="item-name">Items</span>
                 </a>

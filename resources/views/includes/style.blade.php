@@ -2,3 +2,4 @@
 <link id="gull-theme" rel="stylesheet" href="{{ url('backend/assets/styles/css/themes/lite-purple.min.css') }}">
 <link rel="stylesheet" href="{{ url('backend/assets/styles/vendor/perfect-scrollbar.css') }}">    
 <link rel="stylesheet" href="{{ url('backend/assets/styles/vendor/datatables.min.css') }}">
+<link rel="stylesheet" href="{{ url('backend/assets/styles/vendor/sweetalert2.min.css') }}">

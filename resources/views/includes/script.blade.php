@@ -8,3 +8,6 @@
 <script src="{{ url('backend/assets/js/es5/sidebar.large.script.min.js') }}"></script>
 <script src="{{ url('backend/assets/js/vendor/datatables.min.js') }}"></script>
 <script src="{{ url('backend/assets/js/datatables.script.js') }}"></script>
+<script src="{{ url('backend/assets/js/vendor/sweetalert2.min.js') }}"></script>
+<script src="{{ url('backend/assets/js/sweetalert.script.js') }}"></script>
+{{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}

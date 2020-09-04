@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','SIPENTORy - Category')
+@section('title','SIPENTORy - Items')
 @section('content')
 <div class="breadcrumb">
     <h1>Datatables</h1>
@@ -17,7 +17,7 @@
                     Home
                 </li>
                 <li class="breadcrumb-item active">
-                    Category
+                    Items
                 </li>
             </ol>
         </nav>
@@ -27,9 +27,9 @@
     <div class="col-md-12 mb-4">
         <div class="card text-left">
             <div class="card-body">
-                <div class="card-title mb-3">Categories List</div>
-                <a href="{{ route('category.create') }}" class="btn btn-primary btn-rounded mb-1"
-                    style="width: 100% ">+Add</a>
+                <div class="card-title mb-3">Items List</div>
+                <a href="{{ route('item.create') }}" class="btn btn-primary btn-rounded mb-1"
+                    style="width: 100%">+Add</a>
                 <hr>
                 <div class="table-responsive">
                     <table id="zero_configuration_table" class="display table table-striped table-bordered"
@@ -37,7 +37,11 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Item No</th>
+                                <th>Description</th>
+                                <th>Unit</th>
+                                <th>Price</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -45,17 +49,21 @@
                             @foreach ($items as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
-                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->category->name }}</td>
+                                <td>{{ $item->item_no }}</td>
+                                <td>{{ $item->description }}</td>
+                                <td>{{ strtoupper($item->unit) }}</td>
+                                <td>@currency($item->price)</td>
                                 <td>
-                                    <a href="{{ route('category.edit', $item->id) }}" class="btn btn-outline-success">
+                                    <a href="{{ route('item.edit', $item->id) }}" class="btn btn-outline-success">
                                         Edit
                                     </a>
-                                    <form action="{{ route('category.destroy', $item->id )}}" method="POST"
+                                    <form action="{{ route('item.destroy', $item->id )}}" method="POST"
                                         class="d-inline">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" class="btn btn-outline-danger m-1 delete-confirm"
-                                            data-name="{{ $item->name }}">Delete</button>
+                                            data-name="{{ $item->description }}">Delete</button>
                                     </form>
                                 </td>
                             </tr>

@@ -22,4 +22,5 @@ Route::middleware(['auth','admin','verified'])
     ->group(function(){
         Route::get('/dashboard','DashboardController@index')->name('dashboard');
         Route::resource('category', 'CategoryController');
+        Route::resource('item', 'ItemController');
     });
