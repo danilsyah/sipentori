@@ -19,13 +19,14 @@ class Item extends Model
 
     protected $hidden = [];
 
-    // relasi table category
+    // relasi ke model category
     public function category(){
         return $this->belongsTo(Category::class, 'categories_id','id');
     }
 
+    // relasi ke model gallery
     public function galleries()
     {
-        return $this->hasMany(Gallery::class, 'item_id', 'id');
+        return $this->hasMany(Gallery::class, 'items_id', 'id');
     }
 }

@@ -60,7 +60,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $item = Item::findOrFail($id);
+        $item = Item::with(['galleries'])->where('id', $id)->firstOrFail();
 
         return view('pages.item.detail',[
             'item' => $item

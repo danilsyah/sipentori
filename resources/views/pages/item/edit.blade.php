@@ -30,7 +30,7 @@
     <div class="col-md-12">
         <div class="card mb-4">
             <div class="card-body">
-                <div class="card-title mb-3">Edit Item - {{ $item->name }}</div>
+                <div class="card-title mb-3">Edit Item - {{ $item->description }}</div>
                 <div class="form-group col-md-12">
                     <hr>
                 </div>
