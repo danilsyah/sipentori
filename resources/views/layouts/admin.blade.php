@@ -30,9 +30,10 @@
         </div>
     </div>
     <!--=============== End app-admin-wrap ================-->
-    @include('sweetalert::alert')
+    {{-- @include('sweetalert::alert') --}}
     @include('includes.script')
     @stack('confirm-delete')
+    @stack('select2-autocompelete')
 </body>
 
 </html>

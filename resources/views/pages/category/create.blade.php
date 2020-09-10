@@ -36,7 +36,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-12 mb-3">
                             <label for="name">Name</label>
-                            <input type="text" name="name" class="form-control form-control-rounded @error('name') is-invalid @enderror" id="name" placeholder="Enter category name" required value="{{ old('name') }}">
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter category name" required value="{{ old('name') }}">
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror

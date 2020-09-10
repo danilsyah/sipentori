@@ -47,7 +47,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="alerts.html">
+                <a href="{{ route('gallery.index') }}">
                     <i class="nav-icon i-File-Pictures"></i>
                     <span class="item-name">Galleries</span>
                 </a>

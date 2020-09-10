@@ -40,7 +40,7 @@
                         <div class="form-group col-md-8 mb-3">
                             <label for="categories_id">Category</label>
                             <select name="categories_id" id="categories_id" required
-                                class="form-control form-control-rounded @error('categories_id') is-invalid @enderror">
+                                class="form-control select-single @error('categories_id') is-invalid @enderror">
                                 <option value="">-Select-</option>
                                 @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -53,7 +53,7 @@
                         <div class="form-group col-md-8 mb-3">
                             <label for="item_no">No Item</label>
                             <input type="text" name="item_no"
-                                class="form-control form-control-rounded @error('item_no') is-invalid @enderror" id="item_no"
+                                class="form-control @error('item_no') is-invalid @enderror" id="item_no"
                                 placeholder="Enter Item No" required value="{{ old('item_no') }}">
                             @error('item_no')
                             <span class="text-danger">{{ $message }}</span>
@@ -62,7 +62,7 @@
                         <div class="form-group col-md-8 mb-3">
                             <label for="description">Description</label>
                             <input type="text" name="description"
-                                class="form-control form-control-rounded @error('description') is-invalid @enderror"
+                                class="form-control @error('description') is-invalid @enderror"
                                 id="description" placeholder="Enter description item" required
                                 value="{{ old('description') }}">
                             @error('description')
@@ -71,7 +71,7 @@
                         </div>
                         <div class="form-group col-md-8 mb-3">
                             <label for="unit">Unit</label>
-                            <select name="unit" id="unit" class="form-control form-control-rounded @error('unit') is-invalid @enderror" required>
+                            <select name="unit" id="unit" class="form-control select-single @error('unit') is-invalid @enderror" required>
                                 <option value="">-Select-</option>
                                 <option value="pcs">PCS</option>
                                 <option value="meter">Meter</option>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="form-group col-md-8 mb-3">
                             <label for="price">Price Rp.</label>
-                            <input type="number" id="price" name="price" class="form-control form-control-rounded @error('price') is-invalid @enderror" placeholder="Enter price">
+                            <input type="number" id="price" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Enter price">
                             @error('price')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -105,3 +105,10 @@
     </div>
 </div>
 @endsection
+@push('select2-autocompelete')
+<script>
+    $(document).ready(function () {
+        $('.select-single').select2();
+    });
+</script>
+@endpush

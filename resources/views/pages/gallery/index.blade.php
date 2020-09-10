@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','SIPENTORy - Items')
+@section('title','SIPENTORy - Galleries')
 @section('content')
 <div class="breadcrumb">
     <h1>Datatables</h1>
@@ -17,7 +17,7 @@
                     Home
                 </li>
                 <li class="breadcrumb-item active">
-                    Items
+                    Galleries
                 </li>
             </ol>
         </nav>
@@ -27,8 +27,8 @@
     <div class="col-md-12 mb-4">
         <div class="card text-left">
             <div class="card-body">
-                <div class="card-title mb-3">Items List</div>
-                <a href="{{ route('item.create') }}" class="btn btn-primary btn-rounded mb-1"
+                <div class="card-title mb-3">Galleries List</div>
+                <a href="{{ route('gallery.create') }}" class="btn btn-primary btn-rounded mb-1"
                     style="width: 100%">+Add</a>
                 <hr>
                 <div class="table-responsive">
@@ -37,35 +37,33 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Category</th>
                                 <th>Item No</th>
-                                <th>Description</th>
-                                <th>Unit</th>
-                                <th>Price</th>
+                                <th>Item Description</th>
+                                <th>Image</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($items as $item)
+                            @foreach ($galleries as $gallery)
                             <tr>
-                                <td>{{ $item->id }}</td>
-                                <td>{{ $item->category->name }}</td>
-                                <td>{{ $item->item_no }}</td>
-                                <td>{{ $item->description }}</td>
-                                <td>{{ strtoupper($item->unit) }}</td>
-                                <td>@currency($item->price)</td>
+                                <td>{{ $gallery->id }}</td>
+                                <td>{{ $gallery->item->item_no }}</td>
+                                <td>{{ $gallery->item->description }}</td>
                                 <td>
-                                    <a href="{{ route('item.edit', $item->id) }}" class="btn btn-outline-success">
+                                    <img src="{{ url('storage/'.$gallery->image) }}" alt="Gambar" style="width: 150px"
+                                        class="img-thumbnail">
+                                </td>
+                                <td>
+                                    <a href="{{ route('gallery.edit', $gallery->id) }}" class="btn btn-outline-success">
                                         Edit
                                     </a>
-                                    <form action="{{ route('item.destroy', $item->id )}}" method="POST"
+                                    <form action="{{ route('gallery.destroy', $gallery->id )}}" method="POST"
                                         class="d-inline">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" class="btn btn-outline-danger m-1 delete-confirm"
-                                            data-name="{{ $item->description }}">Delete</button>
+                                            data-name="({{ $gallery->id }})-{{ $gallery->item->description }}">Delete</button>
                                     </form>
-                                    <a href="{{ route('item.show', $item->id) }}" class="btn btn-outline-info">Detail</a>
                                 </td>
                             </tr>
                             @endforeach

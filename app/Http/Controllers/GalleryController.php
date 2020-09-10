@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
-use App\Http\Requests\ItemRequest;
-use App\Item;
-use App\Category;
 use App\Gallery;
+use App\Item;
+use App\Http\Requests\GalleryRequest;
 use Illuminate\Http\Request;
 
-class ItemController extends Controller
+class GalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +16,10 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::with(['category'])->get();
+        $galleries = Gallery::with(['item'])->get();
 
-        return view('pages.item.index',[
-            'items' => $items
+        return view('pages.gallery.index',[
+            'galleries' => $galleries
         ]);
     }
 
@@ -32,9 +30,9 @@ class ItemController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('pages.item.create',[
-            'categories' => $categories
+        $items = Item::all();
+        return view('pages.gallery.create',[
+            'items' => $items
         ]);
     }
 
@@ -44,42 +42,43 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ItemRequest $request)
+    public function store(GalleryRequest $request)
     {
         $data = $request->all();
-        Item::create($data);
+        $data['image'] = $request->file('image')->store(
+            'assets/gallery', 'public'
+        );
 
-        return redirect()->route('item.index');
+        Gallery::create($data);
+
+        return redirect()->route('gallery.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Item  $item
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $item = Item::findOrFail($id);
-
-        return view('pages.item.detail',[
-            'item' => $item
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $item = Item::findOrFail($id);
-        $categories = Category::all();
-        return view('pages.item.edit',[
-            'item' => $item,
-            'categories' => $categories
+        $gallery = Gallery::findOrFail($id);
+        $items = Item::all();
+
+        return view('pages.gallery.edit',[
+            'gallery' => $gallery,
+            'items' => $items
         ]);
     }
 
@@ -87,29 +86,33 @@ class ItemController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Item  $item
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ItemRequest $request, $id)
+    public function update(GalleryRequest $request, $id)
     {
         $data = $request->all();
-        $item = Item::findOrFail($id);
-        $item->update($data);
+        $data['image'] = $request->file('image')->store(
+            'assets/gallery', 'public'
+        );
+        $gallery = Gallery::findOrFail($id);
+        $gallery->update($data);
 
-        return redirect()->route('item.index');
+
+        return redirect()->route('gallery.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $item = Item::findOrFail($id);
-        $item->delete();
+        $gallery = Gallery::findOrFail($id);
+        $gallery->delete();
 
-        return redirect()->route('item.index');
+        return redirect()->route('gallery.index');
     }
 }
