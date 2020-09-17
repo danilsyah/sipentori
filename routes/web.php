@@ -24,4 +24,5 @@ Route::middleware(['auth','admin','verified'])
         Route::resource('category', 'CategoryController');
         Route::resource('item', 'ItemController');
         Route::resource('gallery', 'GalleryController');
+        Route::resource('location', 'LocationController');
     });

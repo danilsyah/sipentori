@@ -14,17 +14,17 @@
                 </a>
                 <div class="triangle"></div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" data-item="data-order">
                 <a class="nav-item-hold" href="#">
                     <i class="nav-icon i-Inbox-Into"></i>
-                    <span class="nav-text">Item In</span>
+                    <span class="nav-text">Journal Orders</span>
                 </a>
                 <div class="triangle"></div>
             </li>
             <li class="nav-item">
                 <a class="nav-item-hold" href="#">
                     <i class="nav-icon i-Inbox-Out"></i>
-                    <span class="nav-text">Item Out</span>
+                    <span class="nav-text">Journal Out</span>
                 </a>
                 <div class="triangle"></div>
             </li>
@@ -58,6 +58,27 @@
                     <span class="item-name">Categories</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('location.index') }}">
+                    <i class="nav-icon i-Globe-2"></i>
+                    <span class="item-name">Locations</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="childNav" data-parent="data-order">
+            <li class="nav-item">
+                <a href="#">
+                    <i class="nav-icon i-Post-Mail-2"></i>
+                    <span class="item-name">Orders</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#">
+                    <i class="nav-icon i-Add-Cart"></i>
+                    <span class="item-name">Order Details</span>
+                </a>
+            </li>
+        </ul>
     </div>
     <div class="sidebar-overlay"></div>
 </div>

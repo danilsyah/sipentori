@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ItemRequest;
-use App\Item;
-use App\Category;
-// use App\Gallery;
 use Illuminate\Http\Request;
+use App\Http\Requests\LocationRequest;
+use App\Location;
 
-class ItemController extends Controller
+class LocationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +15,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::with(['category'])->get();
-
-        return view('pages.item.index',[
-            'items' => $items
+        $locations = Location::all();
+        return view('pages.location.index', [
+            'locations' => $locations
         ]);
     }
 
@@ -31,10 +28,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('pages.item.create',[
-            'categories' => $categories
-        ]);
+        return view('pages.location.create');
     }
 
     /**
@@ -43,42 +37,36 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ItemRequest $request)
+    public function store(LocationRequest $request)
     {
         $data = $request->all();
-        Item::create($data);
+        Location::create($data);
 
-        return redirect()->route('item.index');
+        return redirect()->route('location.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Item  $item
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $item = Item::with(['galleries'])->where('id', $id)->firstOrFail();
-
-        return view('pages.item.detail',[
-            'item' => $item
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $item = Item::findOrFail($id);
-        $categories = Category::all();
-        return view('pages.item.edit',[
-            'item' => $item,
-            'categories' => $categories
+        $location = Location::findOrFail($id);
+        return view('pages.location.edit',[
+            'location' => $location
         ]);
     }
 
@@ -86,29 +74,29 @@ class ItemController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Item  $item
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ItemRequest $request, $id)
+    public function update(LocationRequest $request, $id)
     {
         $data = $request->all();
-        $item = Item::findOrFail($id);
-        $item->update($data);
+        $location = Location::findOrFail($id);
+        $location->update($data);
 
-        return redirect()->route('item.index');
+        return redirect()->route('location.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $item = Item::findOrFail($id);
-        $item->delete();
+        $location = Location::findOrFail($id);
+        $location->delete();
 
-        return redirect()->route('item.index');
+        return redirect()->route('location.index');
     }
 }

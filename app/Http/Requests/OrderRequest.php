@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ItemRequest extends FormRequest
+class OrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,9 @@ class ItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'categories_id' => 'required|max:255|integer|exists:categories,id',
-            'item_no'       => 'required|max:255|unique:items,item_no',
-            'description'   => 'required|max:255|string',
-            'unit'          => 'required|max:255',
-            'price'         => 'required|min:0|integer'
+            'locations_id'  => 'required|exists:locations,id',
+            'code'          => 'required|max:10|unique:orders,code', //kode berdasarkan no transfer order / no order dari supplier , di isi manual
+            'note'          => 'required|max:100'
         ];
     }
 }
