@@ -40,6 +40,7 @@
                                 <th>Category</th>
                                 <th>Item No</th>
                                 <th>Description</th>
+                                <th>Stok Min</th>
                                 <th>Unit</th>
                                 <th>Price</th>
                                 <th>Action</th>
@@ -52,6 +53,7 @@
                                 <td>{{ $item->category->name }}</td>
                                 <td>{{ $item->item_no }}</td>
                                 <td>{{ $item->description }}</td>
+                                <td>{{ $item->stok_min }}</td>
                                 <td>{{ strtoupper($item->unit) }}</td>
                                 <td>@currency($item->price)</td>
                                 <td>

@@ -71,6 +71,16 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-8 mb-3">
+                            <label for="stok_min">Stok Min</label>
+                            <input type="number" name="stok_min"
+                                class="form-control @error('stok_min') is-invalid @enderror"
+                                id="stok_min" placeholder="Enter stok minimum item" required
+                                value="{{ $item->stok_min }}">
+                            @error('stok_min')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-8 mb-3">
                             <label for="unit">Unit</label>
                             <select name="unit" id="unit" class="form-control select-single @error('unit') is-invalid @enderror" required>
                                 <option value="{{ $item->unit }}">{{ strtoupper($item->unit) }}</option>

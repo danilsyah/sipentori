@@ -26,7 +26,9 @@ class OrderRequest extends FormRequest
         return [
             'locations_id'  => 'required|exists:locations,id',
             'code'          => 'required|max:10|unique:orders,code', //kode berdasarkan no transfer order / no order dari supplier , di isi manual
-            'note'          => 'required|max:100'
+            'note'          => 'required|max:100',
+            'attachment'    => 'max:1024',
+            // 'status'    => 'required'
         ];
     }
 }

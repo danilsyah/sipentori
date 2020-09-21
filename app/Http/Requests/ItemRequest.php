@@ -25,8 +25,9 @@ class ItemRequest extends FormRequest
     {
         return [
             'categories_id' => 'required|max:255|integer|exists:categories,id',
-            'item_no'       => 'required|max:255|unique:items,item_no',
+            'item_no'       => 'required|max:255',
             'description'   => 'required|max:255|string',
+            'stok_min'      => 'required|max:10|integer',
             'unit'          => 'required|max:255',
             'price'         => 'required|min:0|integer'
         ];

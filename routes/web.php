@@ -18,11 +18,11 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::middleware(['auth','admin','verified'])
-    ->group(function(){
+Route::middleware(['auth','admin','verified'])->group(function(){
         Route::get('/dashboard','DashboardController@index')->name('dashboard');
         Route::resource('category', 'CategoryController');
         Route::resource('item', 'ItemController');
         Route::resource('gallery', 'GalleryController');
         Route::resource('location', 'LocationController');
+        Route::resource('order', 'OrderController');
     });

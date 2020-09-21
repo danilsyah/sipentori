@@ -67,7 +67,7 @@
         </ul>
         <ul class="childNav" data-parent="data-order">
             <li class="nav-item">
-                <a href="#">
+                <a href="{{ route('order.index') }}">
                     <i class="nav-icon i-Post-Mail-2"></i>
                     <span class="item-name">Orders</span>
                 </a>

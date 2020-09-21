@@ -13,18 +13,19 @@ class Item extends Model
         'categories_id',
         'item_no',
         'description',
+        'stok_min',
         'unit',
         'price'
     ];
 
     protected $hidden = [];
 
-    // relasi ke model category
+    // relasi  one-to-one ke model category
     public function category(){
         return $this->belongsTo(Category::class, 'categories_id','id');
     }
 
-    // relasi ke model gallery
+    // relasi one-to-many ke model gallery
     public function galleries()
     {
         return $this->hasMany(Gallery::class, 'items_id', 'id');

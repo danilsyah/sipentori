@@ -11,5 +11,4 @@
 <script src="{{ url('backend/assets/js/vendor/sweetalert2.min.js') }}"></script>
 <script src="{{ url('backend/assets/js/sweetalert.script.js') }}"></script>
 <script src="{{ url('backend/assets/select2/js/select2.min.js') }}"></script>
-<script src="{{ url('backend/assets/js/vendor/dropzone.min.js') }}"></script>
-<script src="{{ url('backend/assets/js/dropzone.script.js') }}"></script>
+
