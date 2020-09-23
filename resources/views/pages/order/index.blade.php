@@ -50,11 +50,13 @@
                     <td>{{ $order->code }}</td>
                     <td>{{ $order->location->kode }}</td>
                     <td>{{ $order->note }}</td>
-                    @if(empty($order->attachment))
-                        <td><span class="badge badge-pill badge-warning">not available</span></td>
-                    @else
-                      <td><a href="#" class="badge badge-pill badge-success" title="Download file">available</a></td>
-                    @endif
+                    <td>
+                      @if (empty($order->attachment))
+                      <span class="badge badge-pill badge-warning">not available</span>
+                      @else
+                      <a href="{{ route('download-attachment',$order->id) }}" class="badge badge-pill badge-success" title="DOWNLOAD">available</a>
+                      @endif
+                    </td>
                     @if ($order->status == 'progress')
                         <td><span class="badge badge-pill badge-danger">process</span></td>
                     @elseif($order->status == 'close')

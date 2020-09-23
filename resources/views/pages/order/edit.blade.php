@@ -20,7 +20,7 @@
                     Orders
                 </li>
                 <li class="breadcrumb-item active">
-                    Create
+                    Edit
                 </li>
             </ol>
         </nav>
@@ -30,19 +30,19 @@
     <div class="col-md-12">
         <div class="card mb-4">
             <div class="card-body">
-                <div class="card-title mb-3">Create Order</div>
+                <div class="card-title mb-3">Edit Order No : {{ $order->code }}</div>
                 <div class="form-group col-md-12">
                     <hr>
                 </div>
-                <form action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('order.update', $order->id ) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('put')
                     <div class="form-row">
-                        
                         <div class="form-group col-md-8 mb-3">
                             <label for="locations_id">From Area</label>
                             <select name="locations_id" id="locations_id" required
                                 class="form-control select-single @error('locations_id') is-invalid @enderror">
-                                <option value="">-Select-</option>
+                                <option value="{{ $order->locations_id }}">({{ $order->location->kode }}) - {{ $order->location->description }}</option>
                                 @foreach ($locations as $location)
                                 <option value="{{ $location->id }}">({{ $location->kode }}) -
                                     {{ $location->description }}</option>
@@ -56,24 +56,24 @@
                           <label for="code">Order Number</label>
                           <input type="text" name="code"
                               class="form-control @error('code') is-invalid @enderror" id="code"
-                              placeholder="Enter order number" required value="{{ old('code') }}">
+                              placeholder="Enter order number" required value="{{ $order->code }}">
                           @error('code')
                           <span class="text-danger">{{ $message }}</span>
                           @enderror
                       </div>
                         <div class="form-group col-md-8 mb-3">
                             <label for="note">Note</label>
-                            <textarea name="note" id="note" cols="30" rows="10" class="form-control @error('note') is-invalid @enderror"></textarea>
+                            <textarea name="note" id="note" cols="30" rows="10" class="form-control @error('note') is-invalid @enderror" >{{ $order->note }}</textarea>
                             @error('note')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group col-md-8 mb-3">
-                            <label for="attach">Attachment</label>
-                            <input type="file" name="attachment" id="attach" class="form-control @error('attachment') is-invalid @enderror">
-                            @error('attachment')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                          <label for="attach">Attachment</label>
+                          <input type="file" name="attachment" id="attach" class="form-control @error('attachment') is-invalid @enderror" value="{{ $order->attachment }}">
+                          @error('attachment')
+                          <span class="text-danger">{{ $message }}</span>
+                          @enderror
                         </div>
                         <div class="form-group col-md-12">
                             <hr>

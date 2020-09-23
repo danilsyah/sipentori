@@ -25,4 +25,5 @@ Route::middleware(['auth','admin','verified'])->group(function(){
         Route::resource('gallery', 'GalleryController');
         Route::resource('location', 'LocationController');
         Route::resource('order', 'OrderController');
+        Route::get('download-attachment/{id}', 'OrderController@download_attachment')->name('download-attachment');
     });

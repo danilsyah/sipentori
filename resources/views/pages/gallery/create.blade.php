@@ -43,7 +43,7 @@
                                 class="form-control select-single form-control-rounded @error('items_id') is-invalid @enderror">
                                 <option value="">-Select-</option>
                                 @foreach ($items as $item)
-                                <option value="{{ $item->id }}">{{ $item->description }}</option>
+                                <option value="{{ $item->id }}">{{ $item->item_no }} - {{ $item->description }}</option>
                                 @endforeach
                             </select>
                             @error('items_id')

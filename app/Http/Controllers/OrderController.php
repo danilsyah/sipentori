@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Order;
 use App\Location;
 use App\Http\Requests\OrderRequest;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -45,10 +47,12 @@ class OrderController extends Controller
     public function store(OrderRequest $request)
     {
         $data = $request->all();
-        $data['attachment'] = $request->file('attachment')->store('assets/attachment', 'public');
+        if($request->file('attachment') !== null){
+            $data['attachment'] = $request->file('attachment')->store('assets/attachment', 'public');
+        }
         $data['status'] = 'progress';
         
-       $order = Order::create($data);
+        $order = Order::create($data);
         return redirect()->route('order.index');
     }
 
@@ -71,7 +75,12 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $order = Order::findOrFail($id);
+        $locations = Location::all();
+        return view('pages.order.edit',[
+            'locations' => $locations,
+            'order'     => $order
+        ]);
     }
 
     /**
@@ -81,9 +90,13 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OrderRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $order = Order::findOrFail($id);
+        $order->update($data);
+
+        return redirect()->route('order.index');
     }
 
     /**
@@ -94,6 +107,17 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::findOrFail($id);
+        $order->delete();
+
+        return redirect()->route('order.index');
+    }
+
+    public function download_attachment($id){
+        $order = Order::findOrFail($id);
+        $attach = $order['attachment'];
+        $name = 'lampiran_order_'.$id.'_'.date("Y-m-d");
+
+        return response()->download(storage_path('app/public/' . $attach), $name);
     }
 }
