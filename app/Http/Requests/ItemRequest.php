@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class ItemRequest extends FormRequest
 {
     /**
@@ -13,6 +13,7 @@ class ItemRequest extends FormRequest
      */
     public function authorize()
     {
+
         return true;
     }
 
@@ -23,13 +24,15 @@ class ItemRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $validations = [
             'categories_id' => 'required|max:255|integer|exists:categories,id',
-            'item_no'       => 'required|max:255',
+            // 'item_no'       => ['required', Rule::unique('items','item_no')->ignore($this->route('item'))],
+            'item_no'       => 'required',
             'description'   => 'required|max:255|string',
-            'stok_min'      => 'required|max:10|integer',
+            'stok_min'      => 'required|min:0|integer',
             'unit'          => 'required|max:255',
             'price'         => 'required|min:0|integer'
         ];
+        return $validations;
     }
 }

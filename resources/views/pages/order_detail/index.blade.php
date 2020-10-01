@@ -17,7 +17,7 @@
                     Home
                 </li>
                 <li class="breadcrumb-item active">
-                    Orders
+                    Order Details
                 </li>
             </ol>
         </nav>
@@ -27,8 +27,7 @@
   <div class="col-md-12 mb-4">
     <div class="card text-left">
       <div class="card-body">
-        <div class="card-title mb-3">Order List</div>
-        <a href="{{ route('order.create') }}" class="btn btn-primary btn-rounded mb-1" style="width: 100%">+Add</a>
+        <div class="card-title mb-3">Order Details</div>
         <hr>
         <div class="table-responsive">
           <table id="zero_configuration_table" class="display table table-striped table-bordered" style="width: 100%">
@@ -36,42 +35,30 @@
               <tr>
                 <th>ID</th>
                 <th>Code</th>
+                <th>Description</th>
+                <th>Serial Number</th>
+                <th>Qty</th>
+                <th>Unit</th>
                 <th>From</th>
-                <th>Note</th>
-                <th>Attachment</th>
                 <th>Status</th>
-                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($orders as $order)
+              @foreach ($orderDetails as $orderDetail)
                   <tr>
-                    <td>{{ $order->id }}</td>
-                    <td>{{ $order->code }}</td>
-                    <td>{{ $order->location->kode }}</td>
-                    <td>{{ $order->note }}</td>
+                    <td>{{ $orderDetail->id }}</td>
+                    <td>{{ $orderDetail->order->code }}</td>
+                    <td>{{ $orderDetail->item->description }}</td>
+                    <td>{{ $orderDetail->serial_number }}</td>
+                    <td>{{ $orderDetail->qty }}</td>
+                    <td>{{ strtoupper($orderDetail->item->unit) }}</td>
+                    <td>{{ $orderDetail->order->location->kode}}</td>
                     <td>
-                      @if (empty($order->attachment))
-                      <span class="badge badge-pill badge-warning">not available</span>
+                      @if ($orderDetail->is_warehouse == true)
+                      <span class="badge badge-pill badge-warning">Warehouse</span>
                       @else
-                      <a href="{{ route('download-attachment',$order->id) }}" class="badge badge-pill badge-success" title="DOWNLOAD">available</a>
+                      <span class="badge badge-pill badge-danger">Out</span>
                       @endif
-                    </td>
-                    @if ($order->status == 'progress')
-                        <td><span class="badge badge-pill badge-danger">process</span></td>
-                    @elseif($order->status == 'close')
-                        <td><span class="badge badge-pill badge-success">close</span></td>
-                    @endif
-                    <td>
-                      @if (Auth::user()->roles == 'ADMIN')
-                      <a href="{{ route('order.edit', $order->id) }}" class="btn btn-outline-success">Edit</a>
-                      <form action="{{ route('order.destroy', $order->id) }}" method="POST" class="d-inline">
-                        @method('delete')
-                        @csrf
-                        <button type="submit" class="btn btn-outline-danger m-1 delete-confirm" data-name="{{ $order->code }}">Delete</button>
-                      </form>
-                      @endif           
-                      <a href="{{ route('order-detail-item', $order->id) }}" class="btn btn-outline-info">Add Item</a>
                     </td>
                   </tr>
               @endforeach

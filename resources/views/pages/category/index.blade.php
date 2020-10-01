@@ -47,6 +47,7 @@
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>
+                                    @if (Auth::user()->roles == 'ADMIN')
                                     <a href="{{ route('category.edit', $item->id) }}" class="btn btn-outline-success">
                                         Edit
                                     </a>
@@ -57,6 +58,7 @@
                                         <button type="submit" class="btn btn-outline-danger m-1 delete-confirm"
                                             data-name="{{ $item->name }}">Delete</button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

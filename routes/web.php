@@ -26,4 +26,6 @@ Route::middleware(['auth','admin','verified'])->group(function(){
         Route::resource('location', 'LocationController');
         Route::resource('order', 'OrderController');
         Route::get('download-attachment/{id}', 'OrderController@download_attachment')->name('download-attachment');
+        Route::resource('order-detail','OrderDetailController');
+        Route::get('order-detail-item/{id}', 'OrderdetailController@order_detail' )->name('order-detail-item');
     });

@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script src="{{ url('backend/assets/js/vendor/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ url('backend/assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ url('backend/assets/js/vendor/perfect-scrollbar.min.js') }}"></script>

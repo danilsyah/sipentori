@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ItemRequest;
 use App\Item;
 use App\Category;
+use App\Stock;
 // use App\Gallery;
 use Illuminate\Http\Request;
 
@@ -47,6 +48,13 @@ class ItemController extends Controller
     {
         $data = $request->all();
         Item::create($data);
+        
+     
+        $item = Item::where('item_no', $request->item_no)->first();
+        Stock::create([
+            'items_id' => $item->id,
+            'qty_total' => 0
+        ]);
 
         return redirect()->route('item.index');
     }
@@ -91,6 +99,8 @@ class ItemController extends Controller
      */
     public function update(ItemRequest $request, $id)
     {
+
+        
         $data = $request->all();
         $item = Item::findOrFail($id);
         $item->update($data);

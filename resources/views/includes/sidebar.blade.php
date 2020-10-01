@@ -73,7 +73,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#">
+                <a href="{{ route('order-detail.index') }}">
                     <i class="nav-icon i-Add-Cart"></i>
                     <span class="item-name">Order Details</span>
                 </a>

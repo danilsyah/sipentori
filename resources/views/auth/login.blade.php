@@ -49,25 +49,22 @@
 
                     <div class="mt-3 text-center">
                         @if(Route::has('password.request'))
-                            <a href="{{ route('password.request') }}" class="text-muted"><u>Forgot Password?</u></a>
+                        <a href="{{ route('password.request') }}" class="text-muted"><u>Forgot Password?</u></a>
                         @endif
+                    </div>
+                    <mt-3 class="text-center">
+                        <hr style="width: 50%; text-align: left;height: 2px">
+                    </mt-3>
+                    <div class="mt-3 text-center">
+                        <a class="btn btn-rounded btn-outline-google btn-block btn-icon-text"
+                            href="{{ route('register') }}">
+                            Create an account
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 text-center "
                 style="background-size: cover;background-image: url({{ url('backend/assets/images/photo-long-3.jpg') }})">
-                <div class="pr-3 auth-right">
-                    <a class="btn btn-rounded btn-outline-primary btn-outline-email btn-block btn-icon-text"
-                        href="{{ route('register') }}">
-                        <i class="i-Mail-with-At-Sign"></i> Sign up with Email
-                    </a>
-                    <a class="btn btn-rounded btn-outline-google btn-block btn-icon-text">
-                        <i class="i-Google-Plus"></i> Sign up with Google
-                    </a>
-                    <a class="btn btn-rounded btn-block btn-icon-text btn-outline-facebook">
-                        <i class="i-Facebook-2"></i> Sign up with Facebook
-                    </a>
-                </div>
             </div>
         </div>
     </div>

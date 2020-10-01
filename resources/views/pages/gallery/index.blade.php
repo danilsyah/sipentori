@@ -54,6 +54,7 @@
                                         class="img-thumbnail">
                                 </td>
                                 <td>
+                                    @if (Auth::user()->roles == 'ADMIN')
                                     <a href="{{ route('gallery.edit', $gallery->id) }}" class="btn btn-outline-success">
                                         Edit
                                     </a>
@@ -64,6 +65,7 @@
                                         <button type="submit" class="btn btn-outline-danger m-1 delete-confirm"
                                             data-name="({{ $gallery->id }})-{{ $gallery->item->description }}">Delete</button>
                                     </form>
+                                    @endif          
                                 </td>
                             </tr>
                             @endforeach

@@ -57,6 +57,7 @@
                                 <td>{{ strtoupper($item->unit) }}</td>
                                 <td>@currency($item->price)</td>
                                 <td>
+                                    @if (Auth::user()->roles == 'ADMIN')
                                     <a href="{{ route('item.edit', $item->id) }}" class="btn btn-outline-success">
                                         Edit
                                     </a>
@@ -67,7 +68,9 @@
                                         <button type="submit" class="btn btn-outline-danger m-1 delete-confirm"
                                             data-name="{{ $item->description }}">Delete</button>
                                     </form>
-                                    <a href="{{ route('item.show', $item->id) }}" class="btn btn-outline-info">Detail</a>
+                                    @endif
+                                    <a href="{{ route('item.show', $item->id) }}"
+                                        class="btn btn-outline-info">Detail</a>
                                 </td>
                             </tr>
                             @endforeach

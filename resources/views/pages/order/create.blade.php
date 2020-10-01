@@ -36,8 +36,7 @@
                 </div>
                 <form action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-row">
-                        
+                    <div class="form-row">             
                         <div class="form-group col-md-8 mb-3">
                             <label for="locations_id">From Area</label>
                             <select name="locations_id" id="locations_id" required
@@ -94,6 +93,5 @@
     $(document).ready(function () {
         $('.select-single').select2();
     });
-
 </script>
 @endpush
