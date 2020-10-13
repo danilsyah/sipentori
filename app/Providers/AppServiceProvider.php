@@ -17,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('currency', function ($expression) {
             return "Rp. <?php echo number_format($expression, 0, ',', '.'); ?>";
         });
+        config(['app.locate' => 'id']);
+        date_default_timezone_set('Asia/Jakarta');
     }
 
     public function register()

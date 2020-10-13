@@ -36,6 +36,7 @@
     @stack('confirm-delete')
     @stack('select2-autocompelete')
     @stack('multiple')
+    @stack('autoSerialNumber')
 </body>
 
 </html>

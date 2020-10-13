@@ -22,7 +22,7 @@
                 <div class="triangle"></div>
             </li>
             <li class="nav-item">
-                <a class="nav-item-hold" href="#">
+                <a class="nav-item-hold" href="{{ route('journal.index') }}">
                     <i class="nav-icon i-Inbox-Out"></i>
                     <span class="nav-text">Journal Out</span>
                 </a>

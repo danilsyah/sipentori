@@ -66,9 +66,8 @@ class OrderdetailController extends Controller
                 OrderDetail::insert($data);
                 // stok update
                 $stock = Stock::where('items_id',$request->items_id[$item])->first();
-                $qty_total = $stock['qty_total'];
-                $jmlStok['qty_total'] = $qty_total + $request->qty[$item];
-                $stock->update($jmlStok);
+                $qty_total['qty_total'] = $stock['qty_total'] + $request->qty[$item];
+                $stock->update($qty_total);
             }
         }
         // update status order

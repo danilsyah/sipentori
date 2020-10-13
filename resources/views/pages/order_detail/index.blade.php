@@ -47,12 +47,12 @@
               @foreach ($orderDetails as $orderDetail)
                   <tr>
                     <td>{{ $orderDetail->id }}</td>
-                    <td>{{ $orderDetail->order->code }}</td>
-                    <td>{{ $orderDetail->item->description }}</td>
+                    <td>{{ !empty($orderDetail->order) ? $orderDetail->order->code : "kosong"}}</td>
+                    <td>{{ !empty($orderDetail->item) ? $orderDetail->item->description : "kosong" }}</td>
                     <td>{{ $orderDetail->serial_number }}</td>
                     <td>{{ $orderDetail->qty }}</td>
-                    <td>{{ strtoupper($orderDetail->item->unit) }}</td>
-                    <td>{{ $orderDetail->order->location->kode}}</td>
+                    <td>{{ !empty($orderDetail->item) ? strtoupper($orderDetail->item->unit) : "kosong" }}</td>
+                    <td>{{ !empty($orderDetail->order) ? $orderDetail->order->location->kode : "kosong"}}</td>
                     <td>
                       @if ($orderDetail->is_warehouse == true)
                       <span class="badge badge-pill badge-warning">Warehouse</span>

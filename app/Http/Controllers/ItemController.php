@@ -19,7 +19,6 @@ class ItemController extends Controller
     public function index()
     {
         $items = Item::with(['category'])->get();
-
         return view('pages.item.index',[
             'items' => $items
         ]);
