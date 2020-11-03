@@ -24,6 +24,10 @@ class JournalDetail extends Model
 
     public function item(){
         return $this->belongsTo(Item::class, 'items_id', 'id')->with('category');
-    }
+		}
+		
+		public function stock(){
+			return $this->belongsTo(Stock::class, 'items_id','id');
+		}
 
 }

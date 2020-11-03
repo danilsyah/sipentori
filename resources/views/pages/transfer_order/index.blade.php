@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'SIPENTORy - Order')
+@section('title','SIPENTORy - Transfer Order')
 @section('content')
 <div class="breadcrumb">
 	<h1>Datatables</h1>
@@ -17,7 +17,7 @@
 					Home
 				</li>
 				<li class="breadcrumb-item active">
-					Order Details
+					Transfer Orders
 				</li>
 			</ol>
 		</nav>
@@ -27,7 +27,9 @@
 	<div class="col-md-12 mb-4">
 		<div class="card text-left">
 			<div class="card-body">
-				<div class="card-title mb-3">Order Details</div>
+				<div class="card-title mb-3">Transfer List</div>
+				<a href="{{ route('transfer-order.create') }}" class="btn btn-primary btn-rounded mb-1"
+					style="width: 100%">+Add</a>
 				<hr>
 				<div class="table-responsive">
 					<table id="zero_configuration_table" class="display table table-striped table-bordered" style="width: 100%">
@@ -35,30 +37,35 @@
 							<tr>
 								<th>ID</th>
 								<th>Code</th>
-								<th>Description</th>
-								<th>Serial Number</th>
-								<th>Qty</th>
-								<th>Unit</th>
-								<th>From</th>
+								<th>Transfer To</th>
 								<th>Status</th>
+								<th>Download</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($orderDetails as $orderDetail)
+							@foreach ($transfer_orders as $transfer)
 							<tr>
-								<td>{{ $orderDetail->id }}</td>
-								<td>{{ !empty($orderDetail->order) ? $orderDetail->order->code : "kosong"}}</td>
-								<td>{{ !empty($orderDetail->item) ? $orderDetail->item->description : "kosong" }}</td>
-								<td>{{ $orderDetail->serial_number }}</td>
-								<td>{{ $orderDetail->qty }}</td>
-								<td>{{ !empty($orderDetail->item) ? strtoupper($orderDetail->item->unit) : "kosong" }}</td>
-								<td>{{ !empty($orderDetail->order) ? $orderDetail->order->location->kode : "kosong"}}</td>
+								<td>{{ $transfer->id }}</td>
+								<td>{{ $transfer->code }}</td>
+								<td>{{ $transfer->location->kode }}</td>
+								<td><span
+										class="badge badge-pill {{ ($transfer->status == "OPEN") ? "badge-danger" : "badge-success" }}  m-1">{{ $transfer->status }}</span>
+								</td>
 								<td>
-									@if ($orderDetail->is_warehouse == true)
-									<span class="badge badge-pill badge-warning">Warehouse</span>
-									@else
-									<span class="badge badge-pill badge-danger">Used</span>
+									<a href="#" class="badge badge-pill badge-success" title="DOWNLOAD">Download</a>
+								</td>
+								<td>
+									@if (Auth::user()->roles == 'ADMIN')
+									<a href="{{ route('transfer-order.edit', $transfer->id) }}" class="btn btn-outline-success">Edit</a>
+									<form action="{{ route('transfer-order.destroy', $transfer->id) }}" method="POST" class="d-inline">
+										@method('delete')
+										@csrf
+										<button type="submit" class="btn btn-outline-danger m-1 delete-confirm"
+											data-name="{{ $transfer->code }}">Delete</button>
+									</form>
 									@endif
+									<a href="{{ route('transfer-order.show', $transfer->id) }}" class="btn btn-outline-info">Add Item</a>
 								</td>
 							</tr>
 							@endforeach

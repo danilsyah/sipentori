@@ -29,5 +29,5 @@ class Item extends Model
     public function galleries()
     {
         return $this->hasMany(Gallery::class, 'items_id', 'id');
-    }
+		}
 }

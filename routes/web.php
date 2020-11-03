@@ -30,6 +30,7 @@ Route::middleware(['auth','admin','verified'])->group(function(){
         Route::get('order-detail-item/{id}', 'OrderdetailController@order_detail' )->name('order-detail-item');
         Route::resource('journal','JournalController');
         Route::resource('journal-detail','JournaldetailController');
-        Route::get('show-serialnumber/{id}', 'JournaldetailController@showSerialNumber');
-        // Route::get('show-serial-number/{id}', 'JournaldetailController@showSerialNumber')->name('show-serialnumber');
+				Route::get('show-serialnumber/{id}', 'JournaldetailController@showSerialNumber');
+        Route::resource('transfer-order','TransferOrderController');
+		        // Route::get('show-serial-number/{id}', 'JournaldetailController@showSerialNumber')->name('show-serialnumber');
 });

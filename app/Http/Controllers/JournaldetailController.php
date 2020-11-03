@@ -62,13 +62,15 @@ class JournaldetailController extends Controller
      */
     public function show($id)
     {
+				$journal_details = JournalDetail::with(['item'])->get();
         $journal = Journal::findOrFail($id);
-        $item_orders = OrderDetail::with(['item','order'])->where('is_warehouse', '1')->get();
-        $items = Item::all();
+        // $item_orders = OrderDetail::with(['item','order'])->where('is_warehouse', '1')->get();
+      	$stocks = Stock::with('item')->get();
         return view('pages.journal_detail.create',[
             'journal'       => $journal,
-            'items'         => $items,
-            'item_orders'   => $item_orders
+						'stocks'         => $stocks,
+						'journal_details' => $journal_details,
+            // 'item_orders'   => $item_orders
         ]);
     }
 
