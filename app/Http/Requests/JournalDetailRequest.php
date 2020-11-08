@@ -26,7 +26,7 @@ class JournalDetailRequest extends FormRequest
         return [
             'journals_id'   => 'required|exists:journals,id',
             'items_id'      => 'required|exists:items,id',
-            'serial_number' => 'required|exists:order_details,serial_number',
+            'serial_number' => 'nullable|exists:order_details,serial_number',
             'qty'           => 'required|integer',
             'note'          => 'required|string|max:255'
         ];
