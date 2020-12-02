@@ -3,6 +3,7 @@
 namespace App\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
         });
         config(['app.locate' => 'id']);
         date_default_timezone_set('Asia/Jakarta');
+	Schema::defaultStringLength(191);
     }
 
     public function register()
