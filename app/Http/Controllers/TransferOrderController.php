@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\TransferOrderRequest;
 use App\TransferOrder;
+use App\Location;
 
 class TransferOrderController extends Controller
 {
@@ -34,7 +35,24 @@ class TransferOrderController extends Controller
      */
     public function create()
     {
-        //
+				$locations = Location::all();
+
+				//generate format code transfer
+				$date = date('yymd');
+				$getId = TransferOrder::getId()->count() + 1;
+				$noUrut = "";
+				if($getId < 10){
+					$noUrut = "00".$getId;
+				}else{
+					$noUrut = "0".$getId;
+				}
+				$code = 'TO'.$date.'-'.$noUrut;
+
+
+				return view('pages.transfer_order.create',[
+					'locations' => $locations,
+					'code'			=> $code,
+				]);
     }
 
     /**
