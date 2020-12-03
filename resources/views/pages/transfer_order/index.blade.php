@@ -44,12 +44,14 @@
 							</tr>
 						</thead>
 						<tbody>
+
 							@foreach ($transfer_orders as $transfer)
 							<tr>
 								<td>{{ $transfer->id }}</td>
 								<td>{{ $transfer->code }}</td>
 								<td>{{ $transfer->location->kode }}</td>
-								<td><span
+								<td>
+									<span
 										class="badge badge-pill {{ ($transfer->status == "OPEN") ? "badge-danger" : "badge-success" }}  m-1">{{ $transfer->status }}</span>
 								</td>
 								<td>

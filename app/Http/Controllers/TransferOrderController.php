@@ -17,14 +17,17 @@ class TransferOrderController extends Controller
     public function index()
     {
 				$transfer_orders = TransferOrder::all();
-				$status = $transfer_orders[0]['status'];
-				if($status == 0){
-					$transfer_orders[0]['status'] = 'OPEN';
-				}else{
-					$transfer_orders[0]['status'] = 'CLOSE';
+				if(!empty($transfer_orders[0]['status'])){
+					$status = $transfer_orders[0]['status'];
+					if($status == 0){
+						$transfer_orders[0]['status'] = 'OPEN';
+					}else{
+						$transfer_orders[0]['status'] = 'CLOSE';
+					}
 				}
+				
 				return view('pages.transfer_order.index',[
-					'transfer_orders' => $transfer_orders
+					'transfer_orders' => $transfer_orders,
 				]);
     }
 
