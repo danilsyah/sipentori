@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
         });
         config(['app.locate' => 'id']);
         date_default_timezone_set('Asia/Jakarta');
-				Schema::defaultStringLength(191);
+		Schema::defaultStringLength(191);
     }
 
     public function register()
