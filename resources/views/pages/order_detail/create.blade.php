@@ -76,11 +76,14 @@
                             <div class="col-md-1 mb-3">
                                 <label for="condition">Condition</label>
                                 <select name="condition[]" id="condition"
-                                    class="form-control  @error('condition') is-invalid @enderror">
+                                    class="form-control  @error('condition') is-invalid @enderror" required>
                                     <option value="">-Select-</option>
                                     <option value="1">New</option>
                                     <option value="2">Second</option>
                                 </select>
+                                @error('condition')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="col-md-2 mb-3">
                                 <label for="action">Action</label> <br>

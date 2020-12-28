@@ -26,8 +26,8 @@ class OrderDetailRequest extends FormRequest
         return [
             'orders_id'     => 'required|exists:orders,id',
             'items_id'      => 'required|exists:items,id',
-            'serial_number' => 'required|max:255',
-            'qty'           => 'required|max:11',
+            'serial_number' => 'required|max:255|unique:order_details,serial_number',
+            'qty'           => 'required|min:1',
             'is_warehouse'  => 'required|boolean',
             'condition'     => 'required'
         ];
