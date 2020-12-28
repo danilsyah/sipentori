@@ -55,7 +55,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="serial_number">Serial Number</label>
                                 <input type="text" name="serial_number[]"
                                     class="form-control @error('serial_number') is-invalid @enderror"
@@ -64,7 +64,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-2 mb-3">
                                 <label for="qty">Quantity</label>
                                 <input type="number" name="qty[]"
                                     class="form-control @error('qty') is-invalid @enderror" placeholder="enter quantity"
@@ -72,6 +72,15 @@
                                 @error('qty')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
+                            </div>
+                            <div class="col-md-1 mb-3">
+                                <label for="condition">Condition</label>
+                                <select name="condition[]" id="condition"
+                                    class="form-control  @error('condition') is-invalid @enderror">
+                                    <option value="">-Select-</option>
+                                    <option value="1">New</option>
+                                    <option value="2">Second</option>
+                                </select>
                             </div>
                             <div class="col-md-2 mb-3">
                                 <label for="action">Action</label> <br>
@@ -104,24 +113,32 @@
         var row = '<div class="form-row" id="hapus-row">' +
         '<div class="col-md-4 mb-3">' +
         '<select name="items_id[]" id="items_id" required class="form-control select-single @error('items_id') is-invalid @enderror">' +
-        ' <option value="">-Select-</option>' + 
+        ' <option value="">-Select-</option>' +
         ' @foreach ($items as $item)' +
         '<option value="{{ $item->id }}">{{ $item->item_no }} - {{ $item->description }}</option>'+
         ' @endforeach' +
         '</select>'+
         '@error('items_id') <span class="text-danger">{{ $message }}</span> @enderror' +
         '</div>'+
-        '<div class="col-md-3 mb-3">'+
+        '<div class="col-md-2 mb-3">'+
         '<input type="text" name="serial_number[]"  class="form-control @error('serial_number') is-invalid @enderror" placeholder="enter serial number" required>'+
         '@error('serial_number')' +
         '<span class="text-danger">{{ $message }}</span>' +
         ' @enderror' +
         '</div>' +
-        '<div class="col-md-3 mb-3">'+
+        '<div class="col-md-2 mb-3">'+
         '<input type="number" name="qty[]" class="form-control @error('qty') is-invalid @enderror" placeholder="enter quantity" required>' +
         '@error('qty')'+
         '<span class="text-danger">{{ $message }}</span>'+
         '@enderror'+
+        '</div>'+
+        '<div class="col-md-1 mb-3">'+
+        '<select name="condition[]" id="condition" class="form-control  @error('condition') is-invalid @enderror">'+
+        '<option value="">-Select-</option>'+
+        '<option value="1">New</option>'+
+        '<option value="2">Second</option>'+
+        '</select>'+
+        '</div>'+
         '</div>';
         $("#add-row").append(row);
     }

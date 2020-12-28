@@ -31,7 +31,7 @@ class OrderdetailController extends Controller
         return view('pages.order_detail.create',[
             'order' => $order,
             'items' => $items
-        ]); 
+        ]);
     }
 
     /**
@@ -60,7 +60,8 @@ class OrderdetailController extends Controller
                     'items_id'      => $request->items_id[$item],
                     'serial_number' => $request->serial_number[$item],
                     'qty'           => $request->qty[$item],
-                    'is_warehouse'  => $request->is_warehouse
+                    'is_warehouse'  => $request->is_warehouse,
+                    'condition'     => $request->condition[$item]
                 ];
                 // insert ke table order detail
                 OrderDetail::insert($data);

@@ -14,7 +14,8 @@ class OrderDetail extends Model
         'orders_id',
         'items_id',
         'serial_number',
-        'qty'
+        'qty',
+        'condition',
     ];
 
     public function item(){

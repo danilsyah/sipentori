@@ -2,78 +2,84 @@
 @section('title', 'SIPENTORy - Order')
 @section('content')
 <div class="breadcrumb">
-	<h1>Datatables</h1>
-	<ul>
-		<li><a href="">UI Kits</a></li>
-		<li>Datatables</li>
-	</ul>
+    <h1>Datatables</h1>
+    <ul>
+        <li><a href="">UI Kits</a></li>
+        <li>Datatables</li>
+    </ul>
 </div>
 <div class="separator-breadcrumb border-top"></div>
 <div class="row mb-4">
-	<div class="col-md-12">
-		<nav>
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item">
-					Home
-				</li>
-				<li class="breadcrumb-item active">
-					Order Details
-				</li>
-			</ol>
-		</nav>
-	</div>
+    <div class="col-md-12">
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    Home
+                </li>
+                <li class="breadcrumb-item active">
+                    Order Details
+                </li>
+            </ol>
+        </nav>
+    </div>
 </div>
 <div class="row mb-4">
-	<div class="col-md-12 mb-4">
-		<div class="card text-left">
-			<div class="card-body">
-				<div class="card-title mb-3">Order Details</div>
-				<hr>
-				<div class="table-responsive">
-					<table id="zero_configuration_table" class="display table table-striped table-bordered" style="width: 100%">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Code</th>
-								<th>Description</th>
-								<th>Serial Number</th>
-								<th>Qty</th>
-								<th>Unit</th>
-								<th>From</th>
-								<th>Status</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach ($orderDetails as $orderDetail)
-							<tr>
-								<td>{{ $orderDetail->id }}</td>
-								<td>{{ !empty($orderDetail->order) ? $orderDetail->order->code : "kosong"}}</td>
-								<td>{{ !empty($orderDetail->item) ? $orderDetail->item->description : "kosong" }}</td>
-								<td>{{ $orderDetail->serial_number }}</td>
-								<td>{{ $orderDetail->qty }}</td>
-								<td>{{ !empty($orderDetail->item) ? strtoupper($orderDetail->item->unit) : "kosong" }}</td>
-								<td>{{ !empty($orderDetail->order) ? $orderDetail->order->location->kode : "kosong"}}</td>
-								<td>
-									@if ($orderDetail->is_warehouse == true)
-									<span class="badge badge-pill badge-warning">Warehouse</span>
-									@else
-									<span class="badge badge-pill badge-danger">Used</span>
-									@endif
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="col-md-12 mb-4">
+        <div class="card text-left">
+            <div class="card-body">
+                <div class="card-title mb-3">Order Details</div>
+                <hr>
+                <div class="table-responsive">
+                    <table id="zero_configuration_table" class="display table table-striped table-bordered"
+                        style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Code</th>
+                                <th>Description</th>
+                                <th>Serial Number</th>
+                                <th>Qty</th>
+                                <th>Unit</th>
+                                <th>Condition</th>
+                                <th>From</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($orderDetails as $orderDetail)
+                            <tr>
+                                <td>{{ $orderDetail->id }}</td>
+                                <td>{{ !empty($orderDetail->order) ? $orderDetail->order->code : "kosong"}}</td>
+                                <td>{{ !empty($orderDetail->item) ? $orderDetail->item->description : "kosong" }}</td>
+                                <td>{{ $orderDetail->serial_number }}</td>
+                                <td>{{ $orderDetail->qty }}</td>
+                                <td>{{ !empty($orderDetail->item) ? strtoupper($orderDetail->item->unit) : "kosong" }}
+                                </td>
+                                <td>{{ !empty($orderDetail->condition) ? strtoupper($orderDetail->condition) : "kosong" }}
+                                </td>
+                                <td>{{ !empty($orderDetail->order) ? $orderDetail->order->location->kode : "kosong"}}
+                                </td>
+                                <td>
+                                    @if ($orderDetail->is_warehouse == true)
+                                    <span class="badge badge-pill badge-warning">Warehouse</span>
+                                    @else
+                                    <span class="badge badge-pill badge-danger">Used</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 
 @push('confirm-delete')
 <script>
-	$('.delete-confirm').click(function (event) {
+    $('.delete-confirm').click(function (event) {
         var form = $(this).closest("form");
         var name = $(this).data("name");
         event.preventDefault();

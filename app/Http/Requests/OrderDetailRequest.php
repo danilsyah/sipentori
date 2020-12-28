@@ -28,7 +28,8 @@ class OrderDetailRequest extends FormRequest
             'items_id'      => 'required|exists:items,id',
             'serial_number' => 'required|max:255',
             'qty'           => 'required|max:11',
-            'is_warehouse'  => 'required|boolean'
+            'is_warehouse'  => 'required|boolean',
+            'condition'     => 'required'
         ];
     }
 }
