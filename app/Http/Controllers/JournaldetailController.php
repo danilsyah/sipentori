@@ -43,13 +43,8 @@ class JournaldetailController extends Controller
        $data = $request->all();
        JournalDetail::create($data);
 
-    // //    update stok
-    $stock = Stock::where('items_id', $request->get('items_id'))->first();
-    $qty['qty_total'] = $stock['qty_total'] - $request->get('qty');
-    $stock->update($qty);
-
     //    update status lokasi barang
-       $order_detail = \DB::table('order_details')->where('serial_number', $request->get('serial_number'))->update(['is_warehouse' => 0]);
+        $order_detail = \DB::table('order_details')->where('serial_number', $request->get('serial_number'))->update(['is_warehouse' => 0]);
 
        return redirect()->back();
     }
@@ -62,15 +57,18 @@ class JournaldetailController extends Controller
      */
     public function show($id)
     {
-				$journal_details = JournalDetail::with(['item'])->get();
+		$journal_details = JournalDetail::with(['item'])->where('journals_id',$id)->get();
         $journal = Journal::findOrFail($id);
-        // $item_orders = OrderDetail::with(['item','order'])->where('is_warehouse', '1')->get();
-      	$stocks = Stock::with('item')->get();
+        $item_orders = \DB::table('order_details')
+                    ->select('items.id','items.item_no','items.description',\DB::raw('SUM(order_details.qty) as stock_total'))
+                    ->join('items', 'order_details.items_id','=','items.id')
+                    ->where('order_details.is_warehouse',1)
+                    ->groupBy('order_details.items_id')
+                    ->get();
         return view('pages.journal_detail.create',[
-            'journal'       => $journal,
-						'stocks'         => $stocks,
-						'journal_details' => $journal_details,
-            // 'item_orders'   => $item_orders
+            'journal'           => $journal,
+			'journal_details'   => $journal_details,
+            'item_orders'       => $item_orders
         ]);
     }
 

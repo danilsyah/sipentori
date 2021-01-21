@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Item;
 use App\Order;
 use App\OrderDetail;
-use App\Stock;
 use App\Http\Requests\OrderDetailRequest;
 
 class OrderdetailController extends Controller
@@ -65,10 +64,6 @@ class OrderdetailController extends Controller
                 ];
                 // insert ke table order detail
                 OrderDetail::insert($data);
-                // stok update
-                $stock = Stock::where('items_id',$request->items_id[$item])->first();
-                $qty_total['qty_total'] = $stock['qty_total'] + $request->qty[$item];
-                $stock->update($qty_total);
             }
         }
         // update status order

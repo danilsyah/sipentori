@@ -83,12 +83,12 @@
 						<tbody>
 							@foreach ($stocks as $stock)
 							<tr>
-								<td>{{ !empty($stock->item) ? $stock->item->item_no : "kosong" }}</td>
-								<td>{{ !empty($stock->item) ? $stock->item->description : "kosong" }}</td>
-								<td>{{ !empty($stock->item) ? $stock->item->stok_min : "kosong" }}</td>
-								<td>{{ $stock->qty_total }}</td>
-								<td>{{ !empty($stock->item) ? strtoupper($stock->item->unit) : "kosong" }}</td>
-								<td>{{ !empty($stock->item) ? strtoupper($stock->item->category->name) : "kosong" }}</td>
+								<td>{{ $stock->item_no}}</td>
+								<td>{{ $stock->description}}</td>
+								<td>{{ $stock->stok_min }}</td>
+								<td>{{ $stock->stock_total }}</td>
+								<td>{{ $stock->unit}}</td>
+								<td>{{ $stock->category}}</td>
 							</tr>
 							@endforeach
 						</tbody>

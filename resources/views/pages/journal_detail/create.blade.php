@@ -44,7 +44,6 @@
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Journal Code</th>
 								<th>Item</th>
 								<th>Serial Number</th>
 								<th>Quantity</th>
@@ -54,7 +53,6 @@
 							@foreach ($journal_details as $journal_detail)
 							<tr>
 								<td>{{ $journal_detail->id }}</td>
-								<td>{{ $journal_detail->code }}</td>
 								<td>{{ $journal_detail->item->description }}</td>
 								<td>{{ $journal_detail->serial_number }}</td>
 								<td>{{ $journal_detail->qty }}</td>
@@ -88,9 +86,9 @@
 						<select name="items_id" id="items_id" required
 							class="form-control select-single @error('items_id') is-invalid @enderror" style="width: 100%">
 							<option id="" value="">-Select-</option>
-							@foreach ($stocks as $stock)
-							<option value="{{ $stock->item->id }}">{{ $stock->item->item_no }}#
-								{{ $stock->item->description }}#({{ $stock->qty_total }})</option>
+							@foreach ($item_orders as $order)
+							<option value="{{ $order->id }}">{{ $order->item_no }}#
+								{{ $order->description }}#({{ $order->stock_total }})</option>
 							@endforeach
 						</select>
 						@error('items_id')
@@ -115,9 +113,8 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="note">Note</label>
-						<textarea name="note" id="note" cols="10" rows="3" class="form-control @error('note') is-invalid @enderror"
-							required></textarea>
+                        <label for="note">Note</label>
+                        <input type="text" name="note" id="note" class="form-control @error('note') is-invalid @enderror" required>
 						@error('note')
 						<span class="text-danger">{{ $message }}</span>
 						@enderror
