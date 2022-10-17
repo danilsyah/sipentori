@@ -45,12 +45,14 @@ class GalleryController extends Controller
     public function store(GalleryRequest $request)
     {
         $data = $request->all();
-        $data['image'] = $request->file('image')->store(
-            'assets/gallery', 'public'
-        );
 
+        if($request->file('image')){
+            $file = $request->file('image');
+            $filename = date('YmdHi').$file->getClientOriginalName();
+            $file->move(public_path('public/Image'), $filename);
+            $data['image'] = $filename;
+        }
         Gallery::create($data);
-
         return redirect()->route('gallery.index');
     }
 

@@ -50,7 +50,7 @@
                                 <td>{{ $gallery->item->item_no }}</td>
                                 <td>{{ $gallery->item->description }}</td>
                                 <td>
-                                    <img src="{{ url('storage/'.$gallery->image) }}" alt="Gambar" style="width: 150px"
+                                    <img src="{{ url('public/Image/'.$gallery->image) }}" alt="Gambar" style="width: 150px"
                                         class="img-thumbnail">
                                 </td>
                                 <td>
@@ -65,7 +65,7 @@
                                         <button type="submit" class="btn btn-outline-danger m-1 delete-confirm"
                                             data-name="({{ $gallery->id }})-{{ $gallery->item->description }}">Delete</button>
                                     </form>
-                                    @endif          
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
