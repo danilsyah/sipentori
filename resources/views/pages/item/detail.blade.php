@@ -66,7 +66,7 @@
                                 <div class="col-lg-4 col-xl-4 mt-3">
                                     <div class="card">
                                         <div class="card-body">
-                                            <img src="{{ url('storage/'.$gallery->image) }}" alt="gambar" class="d-block w-100 rounded">
+                                            <img src="{{ url('public/Image/'.$gallery->image) }}" alt="gambar" class="d-block w-100 rounded">
                                         </div>
                                     </div>
                                 </div>
