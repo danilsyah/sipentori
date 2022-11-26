@@ -19,7 +19,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::with(['location'])->get();
-        
+
         return view('pages.order.index',[
             'orders' => $orders
         ]);
@@ -51,7 +51,7 @@ class OrderController extends Controller
             $data['attachment'] = $request->file('attachment')->store('assets/attachment', 'public');
         }
         $data['status'] = 'progress';
-        
+
         $order = Order::create($data);
         return redirect()->route('order.index');
     }
@@ -116,7 +116,9 @@ class OrderController extends Controller
     public function download_attachment($id){
         $order = Order::findOrFail($id);
         $attach = $order['attachment'];
-        $name = 'lampiran_order_'.$id.'_'.date("Y-m-d");
+        $formatFile = explode(".", $attach);
+        var_dump($formatFile);
+        $name = 'lampiran_order_'.$id.'_'.date("Y-m-d").'.'.$formatFile[1];
 
         return response()->download(storage_path('app/public/' . $attach), $name);
     }
